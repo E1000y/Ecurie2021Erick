@@ -1,3 +1,5 @@
+import com.domain.Horse;
+import com.domain.Stable;
 import org.junit.jupiter.api.Assertions;
 
 public class Test {
@@ -12,6 +14,6 @@ public class Test {
         Horse horse = new Horse(1,"Jolly Jumper");
         Stable stable = new Stable(1,"GAEC des liserons");
         stable.addHorse(horse);
-        Assertions.assertEquals(stable.containsHorse(horse.getname()),"Jolly Jumper");
+        Assertions.assertEquals(stable.containsHorse(horse),true);
     }
 }
