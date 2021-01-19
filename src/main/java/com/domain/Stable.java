@@ -6,9 +6,9 @@ import java.util.List;
 public class Stable {
 
     private int id;
-    private String stableName;
-    private List horses = new ArrayList();
 
+    private String stableName;
+    private List<Horse> horses = new ArrayList<>();
     public Stable(int id, String stableName) {
         this.id = id;
         this.stableName = stableName;
@@ -20,6 +20,19 @@ public class Stable {
     }
 
     public boolean containsHorse(Horse horse) {
-        return horses.contains(horse);
+
+        for (Horse h : horses) {
+            if ((h.getHorseName().equals(horse.getHorseName()))
+                    && (h.getId() == horse.getId())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+  //  boolean isExist = horses.stream().anyMatch(horse -> horse.getHorseName().contains());
+
+    public int getId() {
+        return id;
     }
 }
