@@ -9,7 +9,7 @@ public class TestCalculate{
     void testresultoftwoPlusThreeAndTwoMultiplybyThree() {
 
        Launcher launcher = new Launcher();
-        InterfaceFonctionnelle1 add = (int x, int y)->x+y;
+        InterfaceFonctionnelle1 add = Integer::sum;
         InterfaceFonctionnelle1 multiply = (int x, int y) ->x*y;
 
         int resultAdd = launcher.operate(2,3,add);
