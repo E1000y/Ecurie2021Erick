@@ -1,11 +1,15 @@
 package com.domain;
 
-public class Cavalier {
+public class Rider {
     private int id;
     private String firstName;
 
-    public Cavalier(int id, String firstName) {
+    public Rider(int id, String firstName) {
         this.id = id;
         this.firstName = firstName;
+    }
+
+    public String getfirstName() {
+        return firstName;
     }
 }

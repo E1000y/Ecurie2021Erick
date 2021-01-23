@@ -5,7 +5,7 @@ public class Horse {
 
     private String horseName;
     private int age;
-    private Cavalier cavalier;
+    private Rider rider;
     private char gender;
 
     public Horse(int id, String horseName) {
@@ -13,11 +13,11 @@ public class Horse {
         this.horseName = horseName;
     }
 
-    public Horse(int id, String horseName, int age, Cavalier cavalier, char gender) {
+    public Horse(int id, String horseName, int age, Rider rider, char gender) {
         this.id = id;
         this.horseName = horseName;
         this.age = age;
-        this.cavalier = cavalier;
+        this.rider = rider;
         this.gender = gender;
     }
 
@@ -36,5 +36,20 @@ public class Horse {
 
     public int getAge() {
         return age;
+    }
+
+    public Rider getRider() {
+        return rider;
+    }
+
+    @Override
+    public String toString() {
+        return "Horse{" +
+                "id=" + id +
+                ", horseName='" + horseName + '\'' +
+                ", age=" + age +
+                ", rider=" + rider +
+                ", gender=" + gender +
+                '}';
     }
 }
