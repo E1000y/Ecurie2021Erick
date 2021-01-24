@@ -13,17 +13,10 @@ import java.util.stream.Stream;
 public class Test {
 
 
-    Rider paul = new Rider(1,"Paul");
-    Rider pierre = new Rider(2,"Pierre");
-    Rider jacques = new Rider(3,"Jacques");
+    @BeforeAll
+    public static void setup() {
 
-
-    Horse horse1 = new Horse(1,"Jolly",30,paul,'M');
-    Horse horse2 = new Horse(2,"Gaby",18,pierre,'F');
-    Horse horse3 = new Horse(3,"Henry",10,jacques,'M');
-    Horse horse4 = new Horse(4,"Elodie",2,pierre,'F');
-    Horse horse5 = new Horse(5,"Carla",5,paul,'F');
-
+    }
 
     @org.junit.jupiter.api.Test
     void TestThatFails() {
@@ -40,13 +33,19 @@ public class Test {
     }
 
 
-
     @org.junit.jupiter.api.Test
-    void testListHorsesAndLambdas() {
+    void TestListFemaleHorses_GabyElodieCarla() {
 
-            /*
-liste les chevaux feminins : gaby, elodie, carla
-         */
+        Rider paul = new Rider(1,"Paul");
+        Rider pierre = new Rider(2,"Pierre");
+        Rider jacques = new Rider(3,"Jacques");
+
+
+        Horse horse1 = new Horse(1,"Jolly",30,paul,'M');
+        Horse horse2 = new Horse(2,"Gaby",18,pierre,'F');
+        Horse horse3 = new Horse(3,"Henry",10,jacques,'M');
+        Horse horse4 = new Horse(4,"Elodie",2,pierre,'F');
+        Horse horse5 = new Horse(5,"Carla",5,paul,'F');
 
         List<Horse> horses = new ArrayList<Horse>();
         horses.add(horse1);
@@ -54,6 +53,11 @@ liste les chevaux feminins : gaby, elodie, carla
         horses.add(horse3);
         horses.add(horse4);
         horses.add(horse5);
+
+
+            /*
+liste les chevaux feminins : gaby, elodie, carla
+         */
 
 
         Assertions.assertEquals("Gaby", horses.get(1).getHorseName());
@@ -69,13 +73,33 @@ liste les chevaux feminins : gaby, elodie, carla
 
         Stream<Horse> stream = horses.stream().filter(element -> element.getGender() == 'F');
         Assertions.assertEquals(stream.collect(Collectors.toList()), femaleHorses);
+
     }
 
     @org.junit.jupiter.api.Test
     void testListHorsesLessThan10YearsOldStrictly_ElodieCarla() {
 
+        Rider paul = new Rider(1,"Paul");
+        Rider pierre = new Rider(2,"Pierre");
+        Rider jacques = new Rider(3,"Jacques");
+
+
+        Horse horse1 = new Horse(1,"Jolly",30,paul,'M');
+        Horse horse2 = new Horse(2,"Gaby",18,pierre,'F');
+        Horse horse3 = new Horse(3,"Henry",10,jacques,'M');
+        Horse horse4 = new Horse(4,"Elodie",2,pierre,'F');
+        Horse horse5 = new Horse(5,"Carla",5,paul,'F');
+
+        List<Horse> horses = new ArrayList<Horse>();
+        horses.add(horse1);
+        horses.add(horse2);
+        horses.add(horse3);
+        horses.add(horse4);
+        horses.add(horse5);
+
+
         /*liste les chevaux qui ont moins de 10 ans strictement : elodie, carla*/
-      
+
         List<Horse> horseInf10ListStreamed = horses
                 .stream()
                 .filter(horse -> horse.getAge() < 10).collect(Collectors.toList());
@@ -86,6 +110,26 @@ liste les chevaux feminins : gaby, elodie, carla
 
         Assertions.assertEquals(horseInf10List, horseInf10ListStreamed);
     }
+
+    @org.junit.jupiter.api.Test
+    void testListHorseWhoseRiderIsPierre_GabyElodie() {
+        Rider paul = new Rider(1,"Paul");
+        Rider pierre = new Rider(2,"Pierre");
+        Rider jacques = new Rider(3,"Jacques");
+
+
+        Horse horse1 = new Horse(1,"Jolly",30,paul,'M');
+        Horse horse2 = new Horse(2,"Gaby",18,pierre,'F');
+        Horse horse3 = new Horse(3,"Henry",10,jacques,'M');
+        Horse horse4 = new Horse(4,"Elodie",2,pierre,'F');
+        Horse horse5 = new Horse(5,"Carla",5,paul,'F');
+
+        List<Horse> horses = new ArrayList<Horse>();
+        horses.add(horse1);
+        horses.add(horse2);
+        horses.add(horse3);
+        horses.add(horse4);
+        horses.add(horse5);
 
         /*liste les chevaux donc le cavalier est pierre : gaby, elodie*/
 
@@ -99,17 +143,62 @@ liste les chevaux feminins : gaby, elodie, carla
 
         Assertions.assertEquals(horseRiderPierre, horseRiderPierreStreamed);
 
+
+    }
+
+    @org.junit.jupiter.api.Test
+    void testListHorsesWhoseRiderIsPaulAndNameStartsWithJ_Jolly() {
+        Rider paul = new Rider(1,"Paul");
+        Rider pierre = new Rider(2,"Pierre");
+        Rider jacques = new Rider(3,"Jacques");
+
+
+        Horse horse1 = new Horse(1,"Jolly",30,paul,'M');
+        Horse horse2 = new Horse(2,"Gaby",18,pierre,'F');
+        Horse horse3 = new Horse(3,"Henry",10,jacques,'M');
+        Horse horse4 = new Horse(4,"Elodie",2,pierre,'F');
+        Horse horse5 = new Horse(5,"Carla",5,paul,'F');
+
+        List<Horse> horses = new ArrayList<Horse>();
+        horses.add(horse1);
+        horses.add(horse2);
+        horses.add(horse3);
+        horses.add(horse4);
+        horses.add(horse5);
+
         /*liste les chevaux dont le cavalier est paul et dont le nom commence par "j" : jolly*/
 
         List<Horse> horseRiderPaulNameJ = horses
                 .stream()
                 .filter(horse->horse.getRider().getfirstName().equals("Paul")
-                                && horse.getHorseName().charAt(0)=='J').collect(Collectors.toList());
+                        && horse.getHorseName().charAt(0)=='J').collect(Collectors.toList());
 
         List<Horse> expected = new ArrayList<>();
         expected.add(horse1);
 
         Assertions.assertEquals(expected,horseRiderPaulNameJ);
+
+    }
+
+    @org.junit.jupiter.api.Test
+    void testListHorsesWhoseRiderIsNeitherPaulNorPierre_Henry() {
+        Rider paul = new Rider(1,"Paul");
+        Rider pierre = new Rider(2,"Pierre");
+        Rider jacques = new Rider(3,"Jacques");
+
+
+        Horse horse1 = new Horse(1,"Jolly",30,paul,'M');
+        Horse horse2 = new Horse(2,"Gaby",18,pierre,'F');
+        Horse horse3 = new Horse(3,"Henry",10,jacques,'M');
+        Horse horse4 = new Horse(4,"Elodie",2,pierre,'F');
+        Horse horse5 = new Horse(5,"Carla",5,paul,'F');
+
+        List<Horse> horses = new ArrayList<Horse>();
+        horses.add(horse1);
+        horses.add(horse2);
+        horses.add(horse3);
+        horses.add(horse4);
+        horses.add(horse5);
 
         /*Liste les chevaux dont le cavalier n'est ni Paul ni Pierre, cad henry*/
 
@@ -123,4 +212,7 @@ liste les chevaux feminins : gaby, elodie, carla
 
     }
 
-}
+
+    }
+
+
