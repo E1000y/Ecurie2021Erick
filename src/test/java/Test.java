@@ -3,6 +3,7 @@ import com.domain.Horse;
 import com.domain.Stable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,9 +13,37 @@ import java.util.stream.Stream;
 
 public class Test {
 
+    Rider paul ;
+    Rider pierre;
+    Rider jacques;
 
-    @BeforeAll
-    public static void setup() {
+     Horse horse1;
+     Horse horse2;
+     Horse horse3;
+     Horse horse4;
+     Horse horse5;
+
+     List<Horse> horses;
+
+
+    @BeforeEach
+    public void setup() {
+        paul =  new Rider(1,"Paul");
+        pierre = new Rider(2,"Pierre");
+        jacques = new Rider(3,"Jacques");
+
+        horse1 = new Horse(1,"Jolly",30,paul,'M');
+        horse2 = new Horse(2,"Gaby",18,pierre,'F');
+        horse3 = new Horse(3,"Henry",10,jacques,'M');
+        horse4 = new Horse(4,"Elodie",2,pierre,'F');
+        horse5 = new Horse(5,"Carla",5,paul,'F');
+
+        horses = new ArrayList<Horse>();
+        horses.add(horse1);
+        horses.add(horse2);
+        horses.add(horse3);
+        horses.add(horse4);
+        horses.add(horse5);
 
     }
 
@@ -35,24 +64,6 @@ public class Test {
 
     @org.junit.jupiter.api.Test
     void TestListFemaleHorses_GabyElodieCarla() {
-
-        Rider paul = new Rider(1,"Paul");
-        Rider pierre = new Rider(2,"Pierre");
-        Rider jacques = new Rider(3,"Jacques");
-
-
-        Horse horse1 = new Horse(1,"Jolly",30,paul,'M');
-        Horse horse2 = new Horse(2,"Gaby",18,pierre,'F');
-        Horse horse3 = new Horse(3,"Henry",10,jacques,'M');
-        Horse horse4 = new Horse(4,"Elodie",2,pierre,'F');
-        Horse horse5 = new Horse(5,"Carla",5,paul,'F');
-
-        List<Horse> horses = new ArrayList<Horse>();
-        horses.add(horse1);
-        horses.add(horse2);
-        horses.add(horse3);
-        horses.add(horse4);
-        horses.add(horse5);
 
 
             /*
@@ -79,25 +90,6 @@ liste les chevaux feminins : gaby, elodie, carla
     @org.junit.jupiter.api.Test
     void testListHorsesLessThan10YearsOldStrictly_ElodieCarla() {
 
-        Rider paul = new Rider(1,"Paul");
-        Rider pierre = new Rider(2,"Pierre");
-        Rider jacques = new Rider(3,"Jacques");
-
-
-        Horse horse1 = new Horse(1,"Jolly",30,paul,'M');
-        Horse horse2 = new Horse(2,"Gaby",18,pierre,'F');
-        Horse horse3 = new Horse(3,"Henry",10,jacques,'M');
-        Horse horse4 = new Horse(4,"Elodie",2,pierre,'F');
-        Horse horse5 = new Horse(5,"Carla",5,paul,'F');
-
-        List<Horse> horses = new ArrayList<Horse>();
-        horses.add(horse1);
-        horses.add(horse2);
-        horses.add(horse3);
-        horses.add(horse4);
-        horses.add(horse5);
-
-
         /*liste les chevaux qui ont moins de 10 ans strictement : elodie, carla*/
 
         List<Horse> horseInf10ListStreamed = horses
@@ -113,23 +105,6 @@ liste les chevaux feminins : gaby, elodie, carla
 
     @org.junit.jupiter.api.Test
     void testListHorseWhoseRiderIsPierre_GabyElodie() {
-        Rider paul = new Rider(1,"Paul");
-        Rider pierre = new Rider(2,"Pierre");
-        Rider jacques = new Rider(3,"Jacques");
-
-
-        Horse horse1 = new Horse(1,"Jolly",30,paul,'M');
-        Horse horse2 = new Horse(2,"Gaby",18,pierre,'F');
-        Horse horse3 = new Horse(3,"Henry",10,jacques,'M');
-        Horse horse4 = new Horse(4,"Elodie",2,pierre,'F');
-        Horse horse5 = new Horse(5,"Carla",5,paul,'F');
-
-        List<Horse> horses = new ArrayList<Horse>();
-        horses.add(horse1);
-        horses.add(horse2);
-        horses.add(horse3);
-        horses.add(horse4);
-        horses.add(horse5);
 
         /*liste les chevaux donc le cavalier est pierre : gaby, elodie*/
 
@@ -148,23 +123,6 @@ liste les chevaux feminins : gaby, elodie, carla
 
     @org.junit.jupiter.api.Test
     void testListHorsesWhoseRiderIsPaulAndNameStartsWithJ_Jolly() {
-        Rider paul = new Rider(1,"Paul");
-        Rider pierre = new Rider(2,"Pierre");
-        Rider jacques = new Rider(3,"Jacques");
-
-
-        Horse horse1 = new Horse(1,"Jolly",30,paul,'M');
-        Horse horse2 = new Horse(2,"Gaby",18,pierre,'F');
-        Horse horse3 = new Horse(3,"Henry",10,jacques,'M');
-        Horse horse4 = new Horse(4,"Elodie",2,pierre,'F');
-        Horse horse5 = new Horse(5,"Carla",5,paul,'F');
-
-        List<Horse> horses = new ArrayList<Horse>();
-        horses.add(horse1);
-        horses.add(horse2);
-        horses.add(horse3);
-        horses.add(horse4);
-        horses.add(horse5);
 
         /*liste les chevaux dont le cavalier est paul et dont le nom commence par "j" : jolly*/
 
@@ -182,23 +140,6 @@ liste les chevaux feminins : gaby, elodie, carla
 
     @org.junit.jupiter.api.Test
     void testListHorsesWhoseRiderIsNeitherPaulNorPierre_Henry() {
-        Rider paul = new Rider(1,"Paul");
-        Rider pierre = new Rider(2,"Pierre");
-        Rider jacques = new Rider(3,"Jacques");
-
-
-        Horse horse1 = new Horse(1,"Jolly",30,paul,'M');
-        Horse horse2 = new Horse(2,"Gaby",18,pierre,'F');
-        Horse horse3 = new Horse(3,"Henry",10,jacques,'M');
-        Horse horse4 = new Horse(4,"Elodie",2,pierre,'F');
-        Horse horse5 = new Horse(5,"Carla",5,paul,'F');
-
-        List<Horse> horses = new ArrayList<Horse>();
-        horses.add(horse1);
-        horses.add(horse2);
-        horses.add(horse3);
-        horses.add(horse4);
-        horses.add(horse5);
 
         /*Liste les chevaux dont le cavalier n'est ni Paul ni Pierre, cad henry*/
 
