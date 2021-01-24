@@ -26,6 +26,7 @@ public class Test {
      List<Horse> horses;
 
 
+
     @BeforeEach
     public void setup() {
         paul =  new Rider(1,"Paul");
@@ -38,12 +39,9 @@ public class Test {
         horse4 = new Horse(4,"Elodie",2,pierre,'F');
         horse5 = new Horse(5,"Carla",5,paul,'F');
 
-        horses = new ArrayList<Horse>();
-        horses.add(horse1);
-        horses.add(horse2);
-        horses.add(horse3);
-        horses.add(horse4);
-        horses.add(horse5);
+
+        horses = Arrays.asList(horse1,horse2,horse3,horse4,horse5);
+
 
     }
 
@@ -52,29 +50,16 @@ public class Test {
         Assertions.assertTrue(true);
     }
 
-    @org.junit.jupiter.api.Test
-    void TestStableManagerAddsAHorseInStable() {
-
-        Horse horse = new Horse(1,"Jolly Jumper");
-        Stable stable = new Stable(1,"GAEC des liserons");
-        stable.addHorse(horse);
-        Assertions.assertEquals(stable.containsHorse(horse),true);
-    }
 
 
     @org.junit.jupiter.api.Test
     void TestListFemaleHorses_GabyElodieCarla() {
 
 
-            /*
-liste les chevaux feminins : gaby, elodie, carla
-         */
-
-
+            /* liste les chevaux feminins : gaby, elodie, carla */
         Assertions.assertEquals("Gaby", horses.get(1).getHorseName());
         Assertions.assertEquals("Elodie", horses.get(3).getHorseName());
         Assertions.assertEquals("Carla", horses.get(4).getHorseName());
-
 
         List<Horse> femaleHorses = new ArrayList<>();
         femaleHorses.add(horse2);
@@ -96,11 +81,11 @@ liste les chevaux feminins : gaby, elodie, carla
                 .stream()
                 .filter(horse -> horse.getAge() < 10).collect(Collectors.toList());
 
-        List<Horse> horseInf10List = new ArrayList<>();
-        horseInf10List.add(horse4);
-        horseInf10List.add(horse5);
+        List<Horse> expected = new ArrayList<>();
+        expected.add(horse4);
+        expected.add(horse5);
 
-        Assertions.assertEquals(horseInf10List, horseInf10ListStreamed);
+        Assertions.assertEquals(expected, horseInf10ListStreamed);
     }
 
     @org.junit.jupiter.api.Test
@@ -112,11 +97,11 @@ liste les chevaux feminins : gaby, elodie, carla
                 horses
                         .stream()
                         .filter(horse->horse.getRider().getfirstName().equals("Pierre")).collect(Collectors.toList());
-        List<Horse> horseRiderPierre = new ArrayList<>();
-        horseRiderPierre.add(horse2);
-        horseRiderPierre.add(horse4);
+        List<Horse> expected = new ArrayList<>();
+        expected.add(horse2);
+        expected.add(horse4);
 
-        Assertions.assertEquals(horseRiderPierre, horseRiderPierreStreamed);
+        Assertions.assertEquals(expected, horseRiderPierreStreamed);
 
 
     }
@@ -147,9 +132,9 @@ liste les chevaux feminins : gaby, elodie, carla
                 .stream()
                 .filter(horse -> !(horse.getRider().getfirstName().equals("Pierre")
                         ||horse.getRider().getfirstName().equals("Paul"))).collect(Collectors.toList());
-        List<Horse> horse3List = new ArrayList<>();
-        horse3List.add(horse3);
-        Assertions.assertEquals(horse3List,horseRiderNeitherPaulNorPierre);
+        List<Horse> expected = new ArrayList<>();
+        expected.add(horse3);
+        Assertions.assertEquals(expected,horseRiderNeitherPaulNorPierre);
 
     }
 
