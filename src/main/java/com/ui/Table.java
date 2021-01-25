@@ -1,15 +1,12 @@
 package com.ui;
 
 
-
 import javax.swing.*;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-
-public class Table extends JFrame implements ActionListener {
+public class Table extends JFrame  {
 
     JTable jTable;
     HorseTableModel horseTableModel;
@@ -19,20 +16,14 @@ public class Table extends JFrame implements ActionListener {
     JPanel panel;
     JLabel label;
 
-    public Table(){
-        setSize(400,400);
-
-
+    public Table() {
+        setSize(400, 400);
         horseTableModel = new HorseTableModel();
         jTable = new JTable(horseTableModel);
         sorter = new TableRowSorter<>(horseTableModel);
         jTable.setRowSorter(sorter);
         filterText = new JTextField("");
-
-
         Container c = getContentPane();
-
-
 
         panel = new JPanel(new BorderLayout());
         label = new JLabel("Filter");
@@ -42,30 +33,20 @@ public class Table extends JFrame implements ActionListener {
         button = new JButton("Filter");
 
         c.add((new JScrollPane(jTable)));
-        c.add(button,BorderLayout.SOUTH);
+        c.add(button, BorderLayout.SOUTH);
         c.add(panel, BorderLayout.NORTH);
 
-        button.addActionListener(this);
-
+        button.addActionListener(this::filterClicked);
 
         setVisible(true);
     }
 
     public static void main(String[] args) {
-Table table = new Table();
+        Table table = new Table();
     }
 
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("filter clicked");
+    public void filterClicked(ActionEvent e) {
         String text = filterText.getText();
-        System.out.println("text = " + text);
-        if (text.isBlank()) {
-            sorter.setRowFilter(null);
-        } else {
-            System.out.println("filter with text : "+text);
-            sorter.setRowFilter(RowFilter.regexFilter(text));
-        }
+        sorter.setRowFilter(text.isBlank() ? null : RowFilter.regexFilter(text));
     }
 }
